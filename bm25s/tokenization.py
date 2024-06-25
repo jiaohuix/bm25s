@@ -109,6 +109,11 @@ def tokenize(
         Whether to leave the progress bar after completion. If False, the progress bar
         will disappear after completion. If True, the progress bar will stay on the screen.
 
+    split_fn : Optional[Callable], optional
+        The function to use for splitting the texts into tokens. If None, the function will
+        use the default tokenizer provided by the scikit-learn CountVectorizer. If you provide
+        a custom split_fn, it must take a string as input and return a list of strings.
+
     Note
     -----
     You may pass a single string or a list of strings. If you pass a single string,
