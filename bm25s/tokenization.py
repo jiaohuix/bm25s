@@ -1,5 +1,6 @@
 import re
-from typing import Any, Dict, List, Union, Callable, NamedTuple
+from typing import Any, Dict, List, Union, Callable, NamedTuple, Optional
+
 
 try:
     from tqdm.auto import tqdm
@@ -57,6 +58,7 @@ def tokenize(
     return_ids: bool = True,
     show_progress: bool = True,
     leave: bool = False,
+    split_fn: Optional[Callable] = None,
 ) -> Union[List[List[str]], Tokenized]:
     """
     Tokenize a list using the same method as the scikit-learn CountVectorizer,
@@ -119,7 +121,8 @@ def tokenize(
     stopwords = _infer_stopwords(stopwords)
 
     # Step 1: Split the strings using the regex pattern
-    split_fn = token_pattern.findall
+    split_fn = token_pattern.findall if split_fn is None else split_fn
+    # todo: pass split_fn by params
 
     corpus_ids = []
     token_to_index = {}
